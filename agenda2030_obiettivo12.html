@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDG 12 — Agenda 2030</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet" />
+ 
+  <style>
+    @font-face {
+      font-family: 'Trends';
+      src: url('Trends.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+ 
+    :root {
+      --bg:     #080b0f;
+      --line:   rgba(255,255,255,.06);
+      --accent: #a8f5c8;
+      --dim:    #3a6650;
+      --head:   #ddeae3;
+      --body:   #5a7a66;
+      --muted:  #263630;
+      --green:  #7ef5a8;
+      --yellow: #f5e07e;
+      --red:    #f5857e;
+    }
+ 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+ 
+    body {
+      background: var(--bg);
+      color: var(--body);
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+ 
+    /* ── HERO ── full width, testo enorme a sinistra, info a destra */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      border-bottom: 1px solid var(--line);
+    }
+ 
+    .hero-left {
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--line);
+    }
+ 
+    .chip {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border: 1px solid var(--muted);
+      border-radius: 99px;
+      padding: 4px 14px;
+      align-self: flex-start;
+    }
+ 
+    h1 {
+      font-family: 'Trends', sans-serif;
+      font-size: clamp(4rem, 7vw, 7rem);
+      font-weight: normal;
+      color: var(--head);
+      line-height: .96;
+      letter-spacing: .01em;
+    }
+ 
+    h1 em {
+      color: var(--accent);
+      font-style: normal;
+      display: block;
+    }
+ 
+    .hero-footnote {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .06em;
+    }
+ 
+    .hero-right {
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 48px;
+    }
+ 
+    .stat-block { display: flex; flex-direction: column; gap: 6px; }
+ 
+    .stat-num {
+      font-family: 'Trends', sans-serif;
+      font-size: 3.5rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+ 
+    .stat-label {
+      font-size: 13px;
+      color: var(--body);
+      max-width: 320px;
+      line-height: 1.55;
+    }
+ 
+    .stat-label b { color: var(--head); font-weight: 400; }
+ 
+    /* ── SEZIONE TARGETS — griglia 4 colonne orizzontale */
+    .section-targets {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+ 
+    .section-label {
+      padding: 60px 60px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+ 
+    .section-label h2 {
+      font-family: 'Trends', sans-serif;
+      font-size: 2rem;
+      font-weight: normal;
+      color: var(--head);
+      line-height: 1.1;
+    }
+ 
+    .section-label p {
+      font-size: 12px;
+      color: var(--body);
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+ 
+    .targets-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+ 
+    .target {
+      padding: 48px 36px;
+      border-right: 1px solid var(--line);
+      transition: background .2s;
+    }
+ 
+    .target:last-child { border-right: none; }
+    .target:hover { background: rgba(255,255,255,.02); }
+ 
+    .t-num {
+      font-size: 10px;
+      letter-spacing: .14em;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+ 
+    .t-title {
+      font-family: 'Trends', sans-serif;
+      font-size: 1.1rem;
+      color: var(--head);
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+ 
+    .t-desc {
+      font-size: 12px;
+      color: var(--body);
+      line-height: 1.6;
+    }
+ 
+    /* ── SEZIONE TOOL — split orizzontale */
+    .section-tool {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+      min-height: 80vh;
+    }
+ 
+    .tool-left {
+      padding: 80px 60px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 32px;
+    }
+ 
+    .tool-left h2 {
+      font-family: 'Trends', sans-serif;
+      font-size: 2.6rem;
+      font-weight: normal;
+      color: var(--head);
+      line-height: 1.05;
+    }
+ 
+    .tool-left p {
+      font-size: 13px;
+      color: var(--body);
+      line-height: 1.65;
+      max-width: 400px;
+    }
+ 
+    /* sliders */
+    .sliders { display: flex; flex-direction: column; gap: 20px; }
+ 
+    .srow { display: flex; flex-direction: column; gap: 8px; }
+ 
+    .srow-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+ 
+    .srow-label { font-size: 12px; color: var(--body); }
+ 
+    .srow-val {
+      font-family: 'Trends', sans-serif;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+ 
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 3px;
+      background: var(--muted);
+      border-radius: 99px;
+      outline: none;
+      cursor: pointer;
+    }
+ 
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      transition: transform .15s;
+    }
+ 
+    input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.25); }
+ 
+    .srow-ends {
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+ 
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: 'Trends', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: .03em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity .2s, transform .15s;
+    }
+ 
+    .btn:hover { opacity: .85; transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+ 
+    /* risultato — destra del tool */
+    .tool-right {
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+ 
+    #risultato-inner { display: none; animation: up .4s ease forwards; }
+ 
+    @keyframes up {
+      from { opacity:0; transform:translateY(10px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+ 
+    .r-tag {
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+ 
+    .r-score {
+      font-family: 'Trends', sans-serif;
+      font-size: clamp(5rem, 9vw, 9rem);
+      font-weight: normal;
+      line-height: .9;
+      margin-bottom: 24px;
+      transition: color .3s;
+    }
+ 
+    .r-sub {
+      font-size: 13px;
+      color: var(--body);
+      line-height: 1.65;
+      max-width: 360px;
+      margin-bottom: 36px;
+    }
+ 
+    .r-sub b { color: var(--head); font-weight: 400; }
+ 
+    .bar-label {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+ 
+    .bar-track {
+      height: 5px;
+      background: var(--muted);
+      border-radius: 99px;
+      position: relative;
+      margin-bottom: 24px;
+    }
+ 
+    .bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      width: 0%;
+      transition: width .8s cubic-bezier(.22,1,.36,1), background .3s;
+    }
+ 
+    .bar-media {
+      position: absolute;
+      top: -4px; bottom: -4px;
+      left: 55%;
+      width: 1px;
+      background: rgba(255,255,255,.2);
+    }
+ 
+    .bar-media::after {
+      content: 'media';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: .07em;
+      white-space: nowrap;
+    }
+ 
+    .r-placeholder {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      opacity: .25;
+    }
+ 
+    .ph-line {
+      height: 2px;
+      background: var(--body);
+      border-radius: 99px;
+    }
+ 
+    .ph-line:nth-child(1) { width: 40%; }
+    .ph-line:nth-child(2) { width: 70%; margin-top: 8px; }
+    .ph-line:nth-child(3) { width: 55%; }
+    .ph-line:nth-child(4) { width: 80%; margin-top: 20px; }
+ 
+    /* ── AZIONI — 4 colonne orizzontali */
+    .section-actions {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+    }
+ 
+    .actions-label {
+      padding: 60px 60px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+ 
+    .actions-label h2 {
+      font-family: 'Trends', sans-serif;
+      font-size: 2rem;
+      font-weight: normal;
+      color: var(--head);
+      line-height: 1.1;
+    }
+ 
+    .actions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+ 
+    .action {
+      padding: 48px 36px;
+      border-right: 1px solid var(--line);
+      transition: background .2s;
+    }
+ 
+    .action:last-child { border-right: none; }
+    .action:hover { background: rgba(255,255,255,.02); }
+ 
+    .action-num {
+      font-size: 10px;
+      letter-spacing: .14em;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+ 
+    .action-title {
+      font-family: 'Trends', sans-serif;
+      font-size: 1.2rem;
+      color: var(--head);
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+ 
+    .action-desc {
+      font-size: 12px;
+      color: var(--body);
+      line-height: 1.6;
+    }
+ 
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 60px;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: .06em;
+      border-top: 1px solid var(--line);
+    }
+ 
+    footer a { color: var(--dim); text-decoration: none; }
+ 
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero,
+      .section-targets,
+      .section-tool,
+      .section-actions { grid-template-columns: 1fr; }
+ 
+      .hero-left,
+      .section-label,
+      .tool-left,
+      .actions-label { border-right: none; border-bottom: 1px solid var(--line); padding: 48px 28px; }
+ 
+      .hero-right,
+      .tool-right { padding: 48px 28px; }
+ 
+      .targets-grid,
+      .actions-grid { grid-template-columns: 1fr 1fr; }
+ 
+      .target,
+      .action { padding: 32px 24px; }
+ 
+      .target:nth-child(even),
+      .action:nth-child(even) { border-right: none; }
+ 
+      .target:nth-child(odd),
+      .action:nth-child(odd) { border-right: 1px solid var(--line); }
+ 
+      .target { border-bottom: 1px solid var(--line); }
+      .target:nth-last-child(-n+2) { border-bottom: none; }
+ 
+      footer { flex-direction: column; gap: 8px; padding: 24px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+ 
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="chip">Agenda 2030 · Goal 12 · Terza Media</div>
+    <h1>Consumo<br />&amp;<br /><em>Produzione</em>Responsabili</h1>
+    <div class="hero-footnote">ONU · 17 Obiettivi · 2015–2030</div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-block">
+      <div class="stat-num">4,7</div>
+      <div class="stat-label">pianeti servirebbero se <b>tutti vivessero come un italiano medio</b></div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">1,3B</div>
+      <div class="stat-label">tonnellate di cibo sprecate ogni anno nel mondo — <b>⅓ della produzione globale</b></div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">10%</div>
+      <div class="stat-label">delle emissioni globali proviene dalla <b>fast fashion</b></div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ── TARGETS ── -->
+<section class="section-targets">
+  <div class="section-label">
+    <h2>I target ONU</h2>
+    <p>4 dei principali obiettivi che i governi devono raggiungere entro il 2030.</p>
+  </div>
+  <div class="targets-grid">
+    <div class="target">
+      <div class="t-num">TARGET 12.1</div>
+      <div class="t-title">Piani sostenibili</div>
+      <div class="t-desc">Programmi nazionali di consumo responsabile in tutti i Paesi del mondo.</div>
+    </div>
+    <div class="target">
+      <div class="t-num">TARGET 12.3</div>
+      <div class="t-title">Dimezzare gli sprechi</div>
+      <div class="t-desc">Dimezzare lo spreco alimentare pro capite nella distribuzione e nei consumi.</div>
+    </div>
+    <div class="target">
+      <div class="t-num">TARGET 12.5</div>
+      <div class="t-title">Meno rifiuti</div>
+      <div class="t-desc">Ridurre la produzione di rifiuti tramite prevenzione, riciclo e riutilizzo.</div>
+    </div>
+    <div class="target">
+      <div class="t-num">TARGET 12.8</div>
+      <div class="t-title">Educazione globale</div>
+      <div class="t-desc">Garantire informazioni sugli stili di vita sostenibili a tutta la popolazione.</div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ── TOOL ── -->
+<section class="section-tool">
+  <div class="tool-left">
+    <div>
+      <h2>Calcola il tuo impatto ecologico</h2>
+      <p style="margin-top:12px">Muovi gli slider da 0 (niente) a 10 (tantissimo) e scopri quanto sei sostenibile rispetto alla media italiana.</p>
+    </div>
+ 
+    <div class="sliders">
+      <div class="srow">
+        <div class="srow-top">
+          <span class="srow-label">Carne &amp; pesce</span>
+          <span class="srow-val" id="v-carne">5</span>
+        </div>
+        <input type="range" min="0" max="10" value="5" step="1" oninput="upd('carne',this.value)" />
+        <div class="srow-ends"><span>Niente</span><span>Tantissimo</span></div>
+      </div>
+      <div class="srow">
+        <div class="srow-top">
+          <span class="srow-label">Auto &amp; aerei</span>
+          <span class="srow-val" id="v-trasporti">5</span>
+        </div>
+        <input type="range" min="0" max="10" value="5" step="1" oninput="upd('trasporti',this.value)" />
+        <div class="srow-ends"><span>Niente</span><span>Tantissimo</span></div>
+      </div>
+      <div class="srow">
+        <div class="srow-top">
+          <span class="srow-label">Shopping</span>
+          <span class="srow-val" id="v-shopping">5</span>
+        </div>
+        <input type="range" min="0" max="10" value="5" step="1" oninput="upd('shopping',this.value)" />
+        <div class="srow-ends"><span>Niente</span><span>Tantissimo</span></div>
+      </div>
+      <div class="srow">
+        <div class="srow-top">
+          <span class="srow-label">Energia a casa</span>
+          <span class="srow-val" id="v-energia">5</span>
+        </div>
+        <input type="range" min="0" max="10" value="5" step="1" oninput="upd('energia',this.value)" />
+        <div class="srow-ends"><span>Niente</span><span>Tantissimo</span></div>
+      </div>
+      <div class="srow">
+        <div class="srow-top">
+          <span class="srow-label">Rifiuti</span>
+          <span class="srow-val" id="v-rifiuti">5</span>
+        </div>
+        <input type="range" min="0" max="10" value="5" step="1" oninput="upd('rifiuti',this.value)" />
+        <div class="srow-ends"><span>Niente</span><span>Tantissimo</span></div>
+      </div>
+    </div>
+ 
+    <button class="btn" onclick="calcola()">Calcola il mio impatto →</button>
+  </div>
+ 
+  <div class="tool-right">
+    <div id="risultato-inner">
+      <div class="r-tag">Il tuo punteggio</div>
+      <div class="r-score" id="r-score">—</div>
+      <div class="r-sub" id="r-msg"></div>
+      <div class="bar-label">Confronto con la media italiana</div>
+      <div class="bar-track">
+        <div class="bar-media"></div>
+        <div class="bar-fill" id="bar-fill"></div>
+      </div>
+    </div>
+    <div class="r-placeholder" id="placeholder">
+      <div class="ph-line" style="width:35%;height:3px"></div>
+      <div class="ph-line" style="width:60%;height:80px;margin-top:8px;border-radius:4px"></div>
+      <div class="ph-line" style="width:75%"></div>
+      <div class="ph-line" style="width:50%"></div>
+      <div class="ph-line" style="width:80%;margin-top:20px;height:5px;border-radius:99px"></div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ── AZIONI ── -->
+<section class="section-actions">
+  <div class="actions-label">
+    <h2>Cosa puoi fare tu</h2>
+  </div>
+  <div class="actions-grid">
+    <div class="action">
+      <div class="action-num">01</div>
+      <div class="action-title">Meno carne</div>
+      <div class="action-desc">Un pasto vegetariano al giorno taglia fino al 50% dell'impronta alimentare.</div>
+    </div>
+    <div class="action">
+      <div class="action-num">02</div>
+      <div class="action-title">Muoviti diverso</div>
+      <div class="action-desc">Bici e mezzi pubblici azzerano quasi del tutto le emissioni da trasporto.</div>
+    </div>
+    <div class="action">
+      <div class="action-num">03</div>
+      <div class="action-title">Compra meno</div>
+      <div class="action-desc">Il fast fashion produce il 10% delle emissioni globali. Scegli second-hand.</div>
+    </div>
+    <div class="action">
+      <div class="action-num">04</div>
+      <div class="action-title">Risparmia energia</div>
+      <div class="action-desc">Un grado in meno di riscaldamento equivale al 5–7% di consumi annui in meno.</div>
+    </div>
+  </div>
+</section>
+ 
+<footer>
+  <span>Educazione Civica · Esame di Terza Media</span>
+  <a href="https://sdgs.un.org/goals/goal12" target="_blank">ONU SDG 12 ↗</a>
+</footer>
+ 
+<script>
+  // ── COSTANTI ──────────────────────────────────────
+  const PESI = {
+    carne:     0.30,   // 30% — alimentazione è il fattore più impattante
+    trasporti: 0.25,   // 25%
+    shopping:  0.20,   // 20%
+    energia:   0.15,   // 15%
+    rifiuti:   0.10    // 10%
+  };
+ 
+  const SOGLIA_VERDE  = 4.0;   // ≤ 4.0 → basso impatto
+  const SOGLIA_GIALLO = 6.5;   // ≤ 6.5 → nella media
+  // > 6.5  → alto impatto
+ 
+  const MEDIA_BARRA_PERCENT = 55; // posizione della media sulla barra
+ 
+  // ── STATO ─────────────────────────────────────────
+  const val = { carne:5, trasporti:5, shopping:5, energia:5, rifiuti:5 };
+ 
+  // ── AGGIORNA SLIDER ───────────────────────────────
+  function upd(cat, v) {
+    val[cat] = Number(v);
+    document.getElementById('v-' + cat).textContent = v;
+  }
+ 
+  // ── CALCOLA ───────────────────────────────────────
+  function calcola() {
+    // 1. Punteggio ponderato (0–10)
+    const p = val.carne     * PESI.carne
+            + val.trasporti * PESI.trasporti
+            + val.shopping  * PESI.shopping
+            + val.energia   * PESI.energia
+            + val.rifiuti   * PESI.rifiuti;
+ 
+    // 2. Arrotondamento a una cifra decimale
+    const score = Math.round(p * 10) / 10;
+ 
+    // 3. Livello: verde / giallo / rosso
+    let colore, msg;
+    if (p <= SOGLIA_VERDE) {
+      colore = 'var(--green)';
+      msg = '<b>Ottimo.</b> Sei nel 15% più sostenibile della popolazione italiana. Continua così.';
+    } else if (p <= SOGLIA_GIALLO) {
+      colore = 'var(--yellow)';
+      msg = '<b>Nella media.</b> Hai margini concreti di miglioramento. Anche un solo cambiamento fa la differenza.';
+    } else {
+      colore = 'var(--red)';
+      msg = '<b>Impatto alto.</b> Non è un giudizio — è un\'opportunità. Scegli una sola abitudine da cambiare oggi.';
+    }
+ 
+    // 4. Posizione barra (0–100%)
+    const barra = Math.min(Math.round(p * 10), 100);
+ 
+    // 5. Aggiorno il DOM
+    document.getElementById('r-score').textContent       = score + ' / 10';
+    document.getElementById('r-score').style.color       = colore;
+    document.getElementById('r-msg').innerHTML           = msg;
+    document.getElementById('bar-fill').style.width      = barra + '%';
+    document.getElementById('bar-fill').style.background = colore;
+ 
+    document.getElementById('placeholder').style.display  = 'none';
+    document.getElementById('risultato-inner').style.display = 'block';
+  }
+</script>
+</body>
+</html>
