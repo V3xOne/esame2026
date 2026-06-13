@@ -17,8 +17,7 @@
     }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--white); font-family: var(--font); overflow-x: hidden; cursor: none; }
- 
-    /* ── CURSORE CUSTOM (solo desktop) ── */
+
     #cur, #cur-ring { display: none; }
     @media (pointer: fine) {
       #cur { display: block; position: fixed; z-index: 9999; width: 8px; height: 8px; background: #fff; border-radius: 50%; pointer-events: none; transform: translate(-50%,-50%); mix-blend-mode: difference; transition: width .18s, height .18s; }
@@ -27,11 +26,8 @@
       body.clickable #cur-ring { width: 44px; height: 44px; border-color: rgba(255,255,255,0.7); }
       body { cursor: none; }
     }
-    @media (pointer: coarse) {
-      body { cursor: auto; }
-    }
- 
-    /* ── GRAIN ── */
+    @media (pointer: coarse) { body { cursor: auto; } }
+
     .grain { position: fixed; inset: 0; z-index: 8000; pointer-events: none; opacity: .03;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
       animation: grain .12s steps(1) infinite; }
@@ -42,77 +38,29 @@
       75%  { background-position: -15px 45px; }
       100% { background-position: 35px -10px; }
     }
- 
-    /* ── NAVBAR ── */
-    nav {
-      position: fixed; inset: 0 0 auto 0; z-index: 300;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 40px;
-      transition: background .45s, border-color .45s;
-      border-bottom: 1px solid transparent;
-    }
+
+    nav { position: fixed; inset: 0 0 auto 0; z-index: 300; display: flex; align-items: center; justify-content: space-between; padding: 22px 40px; transition: background .45s, border-color .45s; border-bottom: 1px solid transparent; }
     nav.scrolled { background: rgba(5,5,10,.88); backdrop-filter: blur(14px); border-color: var(--subtle); }
-    .nav-logo {
-      font-size: 11px; font-weight: 800; letter-spacing: .32em; text-transform: uppercase;
-      opacity: 0; animation: fadeDown .8s .15s forwards; white-space: nowrap;
-    }
- 
-    /* Links desktop */
-    .nav-links {
-      display: flex; gap: 40px; list-style: none;
-      opacity: 0; animation: fadeDown .8s .3s forwards;
-    }
-    .nav-links a {
-      color: var(--muted); text-decoration: none; font-size: 10px;
-      letter-spacing: .22em; text-transform: uppercase; transition: color .25s; position: relative;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px;
-      background: #fff; transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
-    }
+    .nav-logo { font-size: 11px; font-weight: 800; letter-spacing: .32em; text-transform: uppercase; opacity: 0; animation: fadeDown .8s .15s forwards; white-space: nowrap; }
+    .nav-links { display: flex; gap: 40px; list-style: none; opacity: 0; animation: fadeDown .8s .3s forwards; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; transition: color .25s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: #fff; transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
     .nav-links a:hover { color: #fff; }
     .nav-links a:hover::after { transform: scaleX(1); }
- 
-    /* ── HAMBURGER BUTTON ── */
-    .hamburger {
-      display: none;
-      flex-direction: column; justify-content: center; align-items: flex-end;
-      gap: 5px; width: 36px; height: 36px;
-      background: none; border: none; cursor: pointer; padding: 4px;
-      position: relative; z-index: 400;
-    }
-    .hamburger span {
-      display: block; height: 1.5px; background: #fff;
-      transition: transform .35s cubic-bezier(.77,0,.175,1), opacity .25s, width .35s;
-      transform-origin: center;
-    }
+
+    .hamburger { display: none; flex-direction: column; justify-content: center; align-items: flex-end; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; position: relative; z-index: 400; }
+    .hamburger span { display: block; height: 1.5px; background: #fff; transition: transform .35s cubic-bezier(.77,0,.175,1), opacity .25s, width .35s; transform-origin: center; }
     .hamburger span:nth-child(1) { width: 24px; }
     .hamburger span:nth-child(2) { width: 18px; }
     .hamburger span:nth-child(3) { width: 24px; }
     .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); width: 24px; }
     .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); width: 24px; }
- 
-    /* ── MOBILE MENU OVERLAY ── */
-    .mobile-menu {
-      position: fixed; inset: 0; z-index: 250;
-      background: rgba(5,5,10,.97); backdrop-filter: blur(20px);
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
-      opacity: 0; pointer-events: none;
-      transition: opacity .4s cubic-bezier(.77,0,.175,1);
-    }
+
+    .mobile-menu { position: fixed; inset: 0; z-index: 250; background: rgba(5,5,10,.97); backdrop-filter: blur(20px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; opacity: 0; pointer-events: none; transition: opacity .4s cubic-bezier(.77,0,.175,1); }
     .mobile-menu.open { opacity: 1; pointer-events: auto; }
-    .mobile-menu a {
-      font-size: clamp(22px, 7vw, 32px); font-weight: 800;
-      letter-spacing: .08em; text-transform: uppercase;
-      color: rgba(255,255,255,.18); text-decoration: none;
-      transition: color .25s;
-      transform: translateY(20px); opacity: 0;
-      transition: color .25s, transform .45s cubic-bezier(.77,0,.175,1), opacity .45s;
-    }
-    .mobile-menu.open a {
-      color: rgba(255,255,255,.65); transform: translateY(0); opacity: 1;
-    }
+    .mobile-menu a { font-size: clamp(22px, 7vw, 32px); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.18); text-decoration: none; transform: translateY(20px); opacity: 0; transition: color .25s, transform .45s cubic-bezier(.77,0,.175,1), opacity .45s; }
+    .mobile-menu.open a { color: rgba(255,255,255,.65); transform: translateY(0); opacity: 1; }
     .mobile-menu.open a:nth-child(1) { transition-delay: .05s; }
     .mobile-menu.open a:nth-child(2) { transition-delay: .10s; }
     .mobile-menu.open a:nth-child(3) { transition-delay: .15s; }
@@ -121,108 +69,119 @@
     .mobile-menu.open a:nth-child(6) { transition-delay: .30s; }
     .mobile-menu a:hover { color: #fff; }
     .mobile-menu-divider { width: 1px; height: 40px; background: var(--subtle); margin: 6px 0; }
- 
-    /* ── HERO ── */
+
     .hero { position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .22; filter: grayscale(20%); }
-    .hero-vignette { position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(to bottom, var(--bg) 0%, transparent 18%, transparent 72%, var(--bg) 100%),
-                  linear-gradient(to right,  var(--bg) 0%, transparent 18%, transparent 82%, var(--bg) 100%); }
+    .hero-vignette { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to bottom, var(--bg) 0%, transparent 18%, transparent 72%, var(--bg) 100%), linear-gradient(to right, var(--bg) 0%, transparent 18%, transparent 82%, var(--bg) 100%); }
     .hero-content { position: relative; z-index: 2; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 0 24px; }
     .hero-eyebrow { font-size: 10px; letter-spacing: .42em; text-transform: uppercase; color: rgba(255,255,255,.3); opacity: 0; animation: fadeUp .9s .55s forwards; }
-    .hero-title { font-size: clamp(64px, 18vw, 148px); font-weight: 800; text-transform: uppercase; line-height: .92; letter-spacing: -.01em; opacity: 0; animation: fadeUp .9s .7s forwards;
-      background: linear-gradient(160deg, #fff 40%, rgba(255,255,255,.25) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-title { font-size: clamp(64px, 18vw, 148px); font-weight: 800; text-transform: uppercase; line-height: .92; letter-spacing: -.01em; opacity: 0; animation: fadeUp .9s .7s forwards; background: linear-gradient(160deg, #fff 40%, rgba(255,255,255,.25) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .hero-sub { font-size: clamp(11px, 3vw, 12px); letter-spacing: .12em; color: rgba(255,255,255,.35); max-width: 340px; line-height: 1.9; opacity: 0; animation: fadeUp .9s .88s forwards; }
     .hero-divider { width: 1px; height: 56px; background: linear-gradient(to bottom, rgba(255,255,255,.45), transparent); margin-top: 4px; opacity: 0; animation: fadeUp .9s 1.1s forwards; }
- 
+
     .scroll-hint { position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0; animation: fadeUp .8s 1.5s forwards; }
     .scroll-hint span { font-size: 9px; letter-spacing: .38em; text-transform: uppercase; color: rgba(255,255,255,.22); }
     .scroll-bar { width: 1px; height: 44px; background: linear-gradient(to bottom, rgba(255,255,255,.45), transparent); animation: scrollPulse 2.2s 2s ease-in-out infinite; transform-origin: top; }
     @keyframes scrollPulse { 0%,100%{ transform: scaleY(1); opacity: .5; } 50%{ transform: scaleY(1.3); opacity: 1; } }
- 
+
     @keyframes fadeUp   { from{ opacity: 0; transform: translateY(30px); }  to{ opacity: 1; transform: translateY(0); } }
     @keyframes fadeDown { from{ opacity: 0; transform: translateY(-18px); } to{ opacity: 1; transform: translateY(0); } }
- 
+
     .reveal { opacity: 0; transform: translateY(36px); transition: opacity .9s ease, transform .9s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
- 
-    /* ── SEZIONI ── */
+
     section { padding: 100px 56px; max-width: 1200px; margin: 0 auto; }
     .section-label { font-size: 9px; letter-spacing: .45em; text-transform: uppercase; color: rgba(255,255,255,.28); margin-bottom: 20px; }
-    .section-title { font-size: clamp(32px, 7vw, 68px); font-weight: 800; text-transform: uppercase; line-height: 1;
-      background: linear-gradient(140deg, #fff 30%, rgba(255,255,255,.3) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 40px; }
- 
-    /* ── INTRO ── */
-    .intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; border-top: 1px solid var(--subtle); padding-top: 60px; }
-    .intro p { font-size: 14px; line-height: 2; color: rgba(255,255,255,.5); }
-    .intro-stat { display: flex; flex-direction: column; gap: 28px; }
-    .stat { display: flex; align-items: baseline; gap: 14px; }
-    .stat-num { font-size: 48px; font-weight: 800; background: linear-gradient(135deg, #fff 40%, rgba(255,255,255,.3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .stat-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
- 
+    .section-title { font-size: clamp(32px, 7vw, 68px); font-weight: 800; text-transform: uppercase; line-height: 1; background: linear-gradient(140deg, #fff 30%, rgba(255,255,255,.3) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 40px; }
+
+    /* ── PERCHÉ — sezione statement ── */
+    .why-section { border-top: 1px solid var(--subtle); padding-top: 60px; }
+    .why-statement {
+      font-size: clamp(28px, 5.5vw, 60px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -.01em;
+      background: linear-gradient(140deg, #fff 40%, rgba(255,255,255,.28) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .why-statement em {
+      font-style: normal;
+      -webkit-text-fill-color: transparent;
+      background: linear-gradient(130deg, rgba(255,255,255,.45) 0%, rgba(255,255,255,.15) 100%);
+      -webkit-background-clip: text; background-clip: text;
+    }
+
     /* ── MAPPA ── */
     .map-image-container { width: 100%; margin-top: 40px; border-radius: 16px; overflow: hidden; border: 1px solid var(--subtle); background: var(--surface); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
     .map-image-container img { width: 100%; height: auto; display: block; transition: transform .8s cubic-bezier(.19,1,.22,1); }
     .map-image-container:hover img { transform: scale(1.02); }
- 
-    /* ── GALLERY ── */
-    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 40px; }
-    .gallery-item { border-radius: 14px; overflow: hidden; cursor: pointer; border: 1px solid var(--subtle); transition: transform .4s ease; }
-    .gallery-item:hover { transform: scale(1.02); }
-    .gallery-item img { width: 100%; height: 220px; object-fit: cover; display: block; }
- 
+
+    /* ── GALLERY SLIDER ── */
+    .gallery-slider { position: relative; margin-top: 40px; }
+    .gallery-track { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 16px; overflow: hidden; border: 1px solid var(--subtle); background: var(--surface); box-shadow: 0 30px 60px rgba(0,0,0,0.5); cursor: zoom-in; }
+    .gallery-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .5s ease; }
+    .gallery-slide.active { opacity: 1; }
+    .gallery-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .gallery-caption-bar { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 24px 20px; background: linear-gradient(transparent, rgba(5,5,10,.85)); display: flex; align-items: flex-end; justify-content: space-between; }
+    .gallery-caption-num { font-size: 36px; font-weight: 800; color: rgba(255,255,255,.12); line-height: 1; letter-spacing: -.02em; }
+    .gallery-caption-text { text-align: right; }
+    .gallery-caption-title { font-size: 13px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: #fff; }
+    .gallery-caption-sub { font-size: 11px; letter-spacing: .08em; color: rgba(255,255,255,.45); margin-top: 4px; line-height: 1.6; max-width: 340px; text-align: right; }
+
+    .gallery-counter { position: absolute; top: 18px; left: 20px; font-size: 10px; letter-spacing: .28em; color: rgba(255,255,255,.6); background: rgba(5,5,10,.55); backdrop-filter: blur(8px); padding: 6px 14px; border-radius: 20px; border: 1px solid var(--subtle); }
+
+    .gallery-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(5,5,10,.6); backdrop-filter: blur(8px); border: 1px solid var(--subtle); border-radius: 50%; width: 48px; height: 48px; color: #fff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .25s, border-color .25s; z-index: 2; }
+    .gallery-arrow:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.25); }
+    .gallery-arrow.prev { left: 16px; }
+    .gallery-arrow.next { right: 16px; }
+
+    .gallery-thumbs { display: flex; gap: 8px; margin-top: 12px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
+    .gallery-thumbs::-webkit-scrollbar { display: none; }
+    .gallery-thumb { width: 80px; height: 52px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid transparent; opacity: .45; transition: opacity .25s, border-color .25s; flex-shrink: 0; }
+    .gallery-thumb.active { border-color: #fff; opacity: 1; }
+
+    .gallery-info { margin-top: 14px; padding: 18px 22px; border: 1px solid var(--subtle); border-radius: 14px; background: var(--surface); display: flex; align-items: baseline; gap: 20px; }
+    .gallery-info-num { font-size: 28px; font-weight: 800; color: rgba(255,255,255,.1); flex-shrink: 0; line-height: 1; }
+    .gallery-info-title { font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #fff; margin-bottom: 5px; }
+    .gallery-info-desc { font-size: 12px; color: rgba(255,255,255,.42); line-height: 1.85; }
+
     /* ── LIGHTBOX ── */
-    .lightbox {
-      position: fixed; inset: 0; background: rgba(5,5,10,.96); backdrop-filter: blur(20px);
-      z-index: 10000; display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none; transition: opacity .4s cubic-bezier(.19,1,.22,1);
-      padding: 24px;
-    }
+    .lightbox { position: fixed; inset: 0; background: rgba(5,5,10,.96); backdrop-filter: blur(20px); z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .4s cubic-bezier(.19,1,.22,1); padding: 24px; }
     .lightbox.active { opacity: 1; pointer-events: auto; }
     .lightbox img { max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: 12px; box-shadow: 0 40px 80px rgba(0,0,0,0.8); transform: scale(.95); transition: transform .4s cubic-bezier(.19,1,.22,1); }
     .lightbox.active img { transform: scale(1); }
-    .lightbox-close {
-      position: absolute; top: 20px; right: 24px;
-      font-size: 10px; letter-spacing: .32em; text-transform: uppercase;
-      color: rgba(255,255,255,.3); cursor: pointer;
-      transition: color .25s; user-select: none;
-    }
+    .lightbox-close { position: absolute; top: 20px; right: 24px; font-size: 10px; letter-spacing: .32em; text-transform: uppercase; color: rgba(255,255,255,.3); cursor: pointer; transition: color .25s; user-select: none; }
     .lightbox-close:hover { color: #fff; }
- 
-    /* ── FOOTER ── */
+    .lightbox-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 50%; width: 52px; height: 52px; color: #fff; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .25s; user-select: none; }
+    .lightbox-arrow:hover { background: rgba(255,255,255,.18); }
+    .lightbox-arrow.prev { left: 20px; }
+    .lightbox-arrow.next { right: 20px; }
+    .lightbox-caption { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); text-align: center; pointer-events: none; }
+    .lightbox-caption-num { font-size: 11px; letter-spacing: .32em; color: rgba(255,255,255,.3); margin-bottom: 4px; }
+    .lightbox-caption-title { font-size: 13px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+
     footer { border-top: 1px solid var(--subtle); padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
     footer span { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.2); }
- 
-    /* ══════════════════════════════
-       RESPONSIVE — TABLET
-    ══════════════════════════════ */
+
     @media (max-width: 900px) {
       section { padding: 80px 32px; }
       nav { padding: 20px 28px; }
-      .intro { grid-template-columns: 1fr; gap: 48px; }
     }
- 
-    /* ══════════════════════════════
-       RESPONSIVE — MOBILE
-    ══════════════════════════════ */
     @media (max-width: 640px) {
       nav { padding: 18px 20px; }
-      .nav-links { display: none; }           /* nasconde i link desktop */
-      .hamburger { display: flex; }           /* mostra hamburger */
- 
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
       section { padding: 72px 20px; }
- 
-      .intro { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; }
-      .intro p { font-size: 13px; }
-      .stat-num { font-size: 40px; }
- 
-      .gallery-grid { grid-template-columns: 1fr; }
-      .gallery-item img { height: 200px; }
- 
       .hero-sub { font-size: 11px; letter-spacing: .08em; }
       .scroll-hint { bottom: 22px; }
- 
       footer { flex-direction: column; align-items: flex-start; padding: 24px 20px; }
+      .gallery-arrow { width: 38px; height: 38px; font-size: 16px; }
+      .gallery-thumb { width: 60px; height: 40px; }
+      .gallery-caption-num { font-size: 24px; }
+      .gallery-caption-title { font-size: 11px; }
+      .gallery-caption-sub { font-size: 10px; }
+      .why-statement { font-size: clamp(22px, 7vw, 40px); }
     }
   </style>
 </head>
@@ -230,40 +189,32 @@
   <div class="grain"></div>
   <div id="cur"></div>
   <div id="cur-ring"></div>
- 
-  <!-- ── MOBILE MENU OVERLAY ── -->
+
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#home"   onclick="closeMobileMenu()">Home</a>
+    <a href="#home"     onclick="closeMobileMenu()">Home</a>
     <div class="mobile-menu-divider"></div>
-    <a href="#intro"  onclick="closeMobileMenu()">La Storia</a>
-    <a href="#materie" onclick="closeMobileMenu()">Materie</a>
+    <a href="#intro"    onclick="closeMobileMenu()">Perché</a>
+    <a href="#materie"  onclick="closeMobileMenu()">Materie</a>
     <a href="https://dnamonsterlab.netlify.app" target="_blank" onclick="closeMobileMenu()">Dna Monster Lab</a>
     <a href="#galleria" onclick="closeMobileMenu()">Galleria</a>
     <a href="agenda2030_obiettivo12.html" onclick="closeMobileMenu()">Ed Civica</a>
   </div>
- 
-  <!-- ── NAVBAR ── -->
+
   <nav id="navbar">
     <div class="nav-logo">Raffaele Sorvillo</div>
- 
-    <!-- Desktop links -->
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
-      <li><a href="#intro">La Storia</a></li>
+      <li><a href="#intro">Perché</a></li>
       <li><a href="#materie">Materie</a></li>
       <li><a href="https://dnamonsterlab.netlify.app">Dna Monster Lab</a></li>
       <li><a href="#galleria">Galleria</a></li>
       <li><a href="agenda2030_obiettivo12.html">Ed Civica</a></li>
     </ul>
- 
-    <!-- Hamburger (mobile) -->
     <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
   </nav>
- 
+
   <!-- ── HERO ── -->
   <section class="hero" id="home" style="max-width:100%;padding:0;">
     <video autoplay muted loop playsinline>
@@ -281,21 +232,18 @@
       <div class="scroll-bar"></div>
     </div>
   </section>
- 
-  <!-- ── INTRO ── -->
+
+  <!-- ── PERCHÉ ── -->
   <section id="intro">
-    <p class="section-label reveal">Introduzione</p>
-    <h2 class="section-title reveal">Cos'è<br/>l'Informatica</h2>
-    <div class="intro reveal">
-      <p>L'informatica è la disciplina scientifica che si occupa del trattamento automatico dell'informazione mediante calcolatori elettronici. Nasce negli anni '40 del Novecento e in pochi decenni ha trasformato ogni aspetto della vita moderna.</p>
-      <div class="intro-stat">
-        <div class="stat"><span class="stat-num">1945</span><span class="stat-label">Primo computer</span></div>
-        <div class="stat"><span class="stat-num">8B+</span><span class="stat-label">Dispositivi connessi</span></div>
-        <div class="stat"><span class="stat-num">12</span><span class="stat-label">Materie collegate</span></div>
-      </div>
+    <p class="section-label reveal">Perché questo argomento</p>
+    <div class="why-section reveal">
+      <p class="why-statement">
+        L'informatica non è una materia.<br/>
+        <em>È il linguaggio del mondo<br/>in cui crescerò.</em>
+      </p>
     </div>
   </section>
- 
+
   <!-- ── MAPPA ── -->
   <section id="materie">
     <p class="section-label reveal">Percorso</p>
@@ -304,37 +252,197 @@
       <img src="mappa.png" alt="Mappa Concettuale Tesina Informatica">
     </div>
   </section>
- 
+
   <!-- ── GALLERIA ── -->
   <section id="galleria">
     <p class="section-label reveal">Approfondimenti</p>
-    <h2 class="section-title reveal">Visuals</h2>
-    <div class="gallery-grid reveal">
-      <div class="gallery-item js-lightbox-trigger">
-        <img src="religione.jpg" alt="Religione">
+    <h2 class="section-title reveal">Galleria</h2>
+
+    <div class="gallery-slider reveal">
+      <div class="gallery-track" id="galleryTrack">
+
+        <div class="gallery-slide active">
+          <img src="storia.jpg" alt="Storia">
+          <div class="gallery-caption-bar">
+            <div class="gallery-caption-num">01</div>
+            <div class="gallery-caption-text">
+              <div class="gallery-caption-title">Storia</div>
+              <div class="gallery-caption-sub">Dal Turing e la seconda guerra mondiale con la creazione della "bomba"</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-slide">
+          <img src="inglese.jpg" alt="Inglese">
+          <div class="gallery-caption-bar">
+            <div class="gallery-caption-num">02</div>
+            <div class="gallery-caption-text">
+              <div class="gallery-caption-title">Inglese</div>
+              <div class="gallery-caption-sub">Steve Jobs e la creazione della Apple</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-slide">
+          <img src="geografia.jpg" alt="Geografia">
+          <div class="gallery-caption-bar">
+            <div class="gallery-caption-num">03</div>
+            <div class="gallery-caption-text">
+              <div class="gallery-caption-title">Geografia</div>
+              <div class="gallery-caption-sub">I Data Center e gli Stati Uniti</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-slide">
+          <img src="tecnologia.jpg" alt="Tecnologia">
+          <div class="gallery-caption-bar">
+            <div class="gallery-caption-num">04</div>
+            <div class="gallery-caption-text">
+              <div class="gallery-caption-title">Tecnologia</div>
+              <div class="gallery-caption-sub">I Data Center: infrastrutture fisiche che fanno girare l'informatica</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-slide">
+          <img src="edcivica.jpg" alt="Ed Civica">
+          <div class="gallery-caption-bar">
+            <div class="gallery-caption-num">05</div>
+            <div class="gallery-caption-text">
+              <div class="gallery-caption-title">Ed Civica</div>
+              <div class="gallery-caption-sub">Obiettivo 12: L'inquinamento dell'ambiente e del mondo di oggi</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-slide">
+          <img src="francese.jpg" alt="Francese">
+          <div class="gallery-caption-bar">
+            <div class="gallery-caption-num">06</div>
+            <div class="gallery-caption-text">
+              <div class="gallery-caption-title">Francese</div>
+              <div class="gallery-caption-sub">Trop d'écran</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-slide">
+          <img src="arte.jpg" alt="Arte">
+          <div class="gallery-caption-bar">
+            <div class="gallery-caption-num">07</div>
+            <div class="gallery-caption-text">
+              <div class="gallery-caption-title">Arte</div>
+              <div class="gallery-caption-sub">Il Puntinismo e la logica del pixel</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-slide">
+          <img src="musica.jpg" alt="Musica">
+          <div class="gallery-caption-bar">
+            <div class="gallery-caption-num">08</div>
+            <div class="gallery-caption-text">
+              <div class="gallery-caption-title">Musica</div>
+              <div class="gallery-caption-sub">L'evoluzione della scrittura musicale</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-slide">
+          <img src="edfisica.jpg" alt="Ed Fisica">
+          <div class="gallery-caption-bar">
+            <div class="gallery-caption-num">09</div>
+            <div class="gallery-caption-text">
+              <div class="gallery-caption-title">Ed Fisica</div>
+              <div class="gallery-caption-sub">App e sistemi di monitoraggio della prestazioni</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-slide">
+          <img src="scienze.jpg" alt="Scienze">
+          <div class="gallery-caption-bar">
+            <div class="gallery-caption-num">10</div>
+            <div class="gallery-caption-text">
+              <div class="gallery-caption-title">Scienze</div>
+              <div class="gallery-caption-sub">Il DNA e la trascrizione automatica tramite sito web</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-slide">
+          <img src="italiano.jpg" alt="Italiano">
+          <div class="gallery-caption-bar">
+            <div class="gallery-caption-num">11</div>
+            <div class="gallery-caption-text">
+              <div class="gallery-caption-title">Italiano</div>
+              <div class="gallery-caption-sub">Primo Levi e il racconto Il Versificatore</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-slide">
+          <img src="religione.jpg" alt="Religione">
+          <div class="gallery-caption-bar">
+            <div class="gallery-caption-num">12</div>
+            <div class="gallery-caption-text">
+              <div class="gallery-caption-title">Religione</div>
+              <div class="gallery-caption-sub">Lettera e l'uso sapiente dell'intelligenza artificiale — Enciclica Papaleone XIV</div>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <div class="gallery-item js-lightbox-trigger">
-        <img src="arte.jpg" alt="Arte">
-      </div>
-      <div class="gallery-item js-lightbox-trigger">
-        <img src="italiano.jpg" alt="Italiano">
+
+      <div class="gallery-counter" id="galleryCounter">01 / 12</div>
+      <button class="gallery-arrow prev" id="galleryPrev" aria-label="Precedente">&#8592;</button>
+      <button class="gallery-arrow next" id="galleryNext" aria-label="Successiva">&#8594;</button>
+    </div>
+
+    <div class="gallery-thumbs" id="galleryThumbs">
+      <img class="gallery-thumb active" src="storia.jpg"     alt="01 Storia"     data-i="0">
+      <img class="gallery-thumb"        src="inglese.jpg"    alt="02 Inglese"    data-i="1">
+      <img class="gallery-thumb"        src="geografia.jpg"  alt="03 Geografia"  data-i="2">
+      <img class="gallery-thumb"        src="tecnologia.jpg" alt="04 Tecnologia" data-i="3">
+      <img class="gallery-thumb"        src="edcivica.jpg"   alt="05 Ed Civica"  data-i="4">
+      <img class="gallery-thumb"        src="francese.jpg"   alt="06 Francese"   data-i="5">
+      <img class="gallery-thumb"        src="arte.jpg"       alt="07 Arte"       data-i="6">
+      <img class="gallery-thumb"        src="musica.jpg"     alt="08 Musica"     data-i="7">
+      <img class="gallery-thumb"        src="edfisica.jpg"   alt="09 Ed Fisica"  data-i="8">
+      <img class="gallery-thumb"        src="scienze.jpg"    alt="10 Scienze"    data-i="9">
+      <img class="gallery-thumb"        src="italiano.jpg"   alt="11 Italiano"   data-i="10">
+      <img class="gallery-thumb"        src="religione.jpg"  alt="12 Religione"  data-i="11">
+    </div>
+
+    <div class="gallery-info reveal">
+      <div class="gallery-info-num" id="galleryInfoNum">01</div>
+      <div class="gallery-info-body">
+        <div class="gallery-info-title" id="galleryInfoTitle">Storia</div>
+        <div class="gallery-info-desc"  id="galleryInfoDesc">Dal Turing e la seconda guerra mondiale con la creazione della "bomba"</div>
       </div>
     </div>
+
   </section>
- 
+
   <!-- ── LIGHTBOX ── -->
   <div class="lightbox" id="mapLightbox">
-    <span class="lightbox-close" id="lightboxClose">✕ &nbsp;Chiudi</span>
+    <span class="lightbox-close" id="lightboxClose">&#x2715;&nbsp;Chiudi</span>
+    <button class="lightbox-arrow prev" id="lbPrev" style="display:none">&#8592;</button>
     <img src="" alt="Immagine ingrandita">
+    <button class="lightbox-arrow next" id="lbNext" style="display:none">&#8594;</button>
+    <div class="lightbox-caption" id="lbCaption" style="display:none">
+      <div class="lightbox-caption-num" id="lbNum"></div>
+      <div class="lightbox-caption-title" id="lbTitle"></div>
+    </div>
   </div>
- 
+
   <footer>
     <span>Informatica &mdash; Terza Media 2026</span>
     <span>&copy; 2026</span>
   </footer>
- 
+
   <script>
-    /* ── CURSORE (solo pointer: fine) ── */
     if (window.matchMedia('(pointer: fine)').matches) {
       const cur = document.getElementById('cur');
       const curRing = document.getElementById('cur-ring');
@@ -347,17 +455,14 @@
         requestAnimationFrame(anim);
       })();
     }
- 
-    /* ── NAVBAR SCROLL ── */
+
     window.addEventListener('scroll', () =>
       document.getElementById('navbar').classList.toggle('scrolled', scrollY > 40)
     );
- 
-    /* ── HAMBURGER ── */
-    const hamburger   = document.getElementById('hamburger');
-    const mobileMenu  = document.getElementById('mobileMenu');
+
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
     let menuOpen = false;
- 
     hamburger.addEventListener('click', () => {
       menuOpen = !menuOpen;
       hamburger.classList.toggle('open', menuOpen);
@@ -365,7 +470,6 @@
       hamburger.setAttribute('aria-expanded', menuOpen);
       document.body.style.overflow = menuOpen ? 'hidden' : '';
     });
- 
     function closeMobileMenu() {
       menuOpen = false;
       hamburger.classList.remove('open');
@@ -373,48 +477,138 @@
       hamburger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     }
- 
-    /* ── REVEAL ── */
+
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
       });
     }, { threshold: .12 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
- 
+
+    /* ── GALLERY SLIDER ── */
+    const gData = [
+      { num: '01', title: 'Storia',      desc: 'Dal Turing e la seconda guerra mondiale con la creazione della "bomba"' },
+      { num: '02', title: 'Inglese',     desc: 'Steve Jobs e la creazione della Apple' },
+      { num: '03', title: 'Geografia',   desc: 'I Data Center e gli Stati Uniti' },
+      { num: '04', title: 'Tecnologia',  desc: "I Data Center: infrastrutture fisiche che fanno girare l'informatica" },
+      { num: '05', title: 'Ed Civica',   desc: "Obiettivo 12: L'inquinamento dell'ambiente e del mondo di oggi" },
+      { num: '06', title: 'Francese',    desc: "Trop d'écran" },
+      { num: '07', title: 'Arte',        desc: 'Il Puntinismo e la logica del pixel' },
+      { num: '08', title: 'Musica',      desc: "L'evoluzione della scrittura musicale" },
+      { num: '09', title: 'Ed Fisica',   desc: 'App e sistemi di monitoraggio della prestazioni' },
+      { num: '10', title: 'Scienze',     desc: 'Il DNA e la trascrizione automatica tramite sito web' },
+      { num: '11', title: 'Italiano',    desc: 'Primo Levi e il racconto Il Versificatore' },
+      { num: '12', title: 'Religione',   desc: "Lettera e l'uso sapiente dell'intelligenza artificiale — Enciclica Papaleone XIV" },
+    ];
+
+    const gSlides    = document.querySelectorAll('.gallery-slide');
+    const gThumbs    = document.querySelectorAll('.gallery-thumb');
+    const gCounter   = document.getElementById('galleryCounter');
+    const gInfoNum   = document.getElementById('galleryInfoNum');
+    const gInfoTitle = document.getElementById('galleryInfoTitle');
+    const gInfoDesc  = document.getElementById('galleryInfoDesc');
+    const gTotal     = gSlides.length;
+    let gCur = 0;
+    const pad = n => String(n).padStart(2, '0');
+
+    function gGo(i) {
+      gSlides[gCur].classList.remove('active');
+      gThumbs[gCur].classList.remove('active');
+      gCur = (i + gTotal) % gTotal;
+      gSlides[gCur].classList.add('active');
+      gThumbs[gCur].classList.add('active');
+      gCounter.textContent   = pad(gCur + 1) + ' / ' + pad(gTotal);
+      gInfoNum.textContent   = gData[gCur].num;
+      gInfoTitle.textContent = gData[gCur].title;
+      gInfoDesc.textContent  = gData[gCur].desc;
+      gThumbs[gCur].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
+    document.getElementById('galleryPrev').addEventListener('click', () => gGo(gCur - 1));
+    document.getElementById('galleryNext').addEventListener('click', () => gGo(gCur + 1));
+    gThumbs.forEach(t => t.addEventListener('click', () => gGo(+t.dataset.i)));
+
     /* ── LIGHTBOX ── */
-    const lightbox     = document.getElementById('mapLightbox');
-    const lightboxImg  = lightbox.querySelector('img');
+    const lightbox      = document.getElementById('mapLightbox');
+    const lightboxImg   = lightbox.querySelector('img');
     const lightboxClose = document.getElementById('lightboxClose');
- 
+    const lbPrev        = document.getElementById('lbPrev');
+    const lbNext        = document.getElementById('lbNext');
+    const lbCaption     = document.getElementById('lbCaption');
+    const lbNum         = document.getElementById('lbNum');
+    const lbTitle       = document.getElementById('lbTitle');
+    let lbMode = 'map';
+
+    function openLightboxMap(src) {
+      lbMode = 'map';
+      lightboxImg.src = src;
+      lbPrev.style.display = 'none';
+      lbNext.style.display = 'none';
+      lbCaption.style.display = 'none';
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function openLightboxGallery(index) {
+      lbMode = 'gallery';
+      gCur = (index + gTotal) % gTotal;
+      lightboxImg.src = gSlides[gCur].querySelector('img').src;
+      lbNum.textContent   = gData[gCur].num;
+      lbTitle.textContent = gData[gCur].title;
+      lbPrev.style.display = 'flex';
+      lbNext.style.display = 'flex';
+      lbCaption.style.display = 'block';
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function lbGo(dir) {
+      if (lbMode !== 'gallery') return;
+      const next = (gCur + dir + gTotal) % gTotal;
+      openLightboxGallery(next);
+      gGo(next);
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
     document.querySelectorAll('.js-lightbox-trigger').forEach(item => {
-      item.addEventListener('click', () => {
-        lightboxImg.src = item.querySelector('img').src;
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      });
+      item.addEventListener('click', () => openLightboxMap(item.querySelector('img').src));
       if (window.matchMedia('(pointer: fine)').matches) {
         item.addEventListener('mouseenter', () => document.body.classList.add('clickable'));
         item.addEventListener('mouseleave', () => document.body.classList.remove('clickable'));
       }
     });
- 
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-    }
- 
-    lightbox.addEventListener('click', closeLightbox);
+
+    document.getElementById('galleryTrack').addEventListener('click', e => {
+      if (e.target.closest('.gallery-arrow')) return;
+      openLightboxGallery(gCur);
+    });
+
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox || e.target === lightboxImg) closeLightbox();
+    });
     lightboxClose.addEventListener('click', e => { e.stopPropagation(); closeLightbox(); });
- 
-    /* Chiudi lightbox con Escape */
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
- 
-    /* Cursore nav links */
+    lbPrev.addEventListener('click', e => { e.stopPropagation(); lbGo(-1); });
+    lbNext.addEventListener('click', e => { e.stopPropagation(); lbGo(+1); });
+
+    document.addEventListener('keydown', e => {
+      if (lightbox.classList.contains('active')) {
+        if (e.key === 'Escape')     closeLightbox();
+        if (e.key === 'ArrowLeft')  lbGo(-1);
+        if (e.key === 'ArrowRight') lbGo(+1);
+      } else {
+        if (e.key === 'ArrowLeft')  gGo(gCur - 1);
+        if (e.key === 'ArrowRight') gGo(gCur + 1);
+      }
+    });
+
     if (window.matchMedia('(pointer: fine)').matches) {
-      document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('mouseenter', () => document.body.classList.add('clickable'));
-        link.addEventListener('mouseleave', () => document.body.classList.remove('clickable'));
+      document.querySelectorAll('.gallery-arrow, .gallery-thumb, .nav-links a, #galleryTrack').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('clickable'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('clickable'));
       });
     }
   </script>
